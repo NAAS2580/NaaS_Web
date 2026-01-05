@@ -8,12 +8,10 @@ if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '127.0.0.1'
     $pass = '';
 } else {
     // 2. إعدادات استضافة InfinityFree
-    // ملاحظة: يجب عليك جلب "MySQL Hostname" من لوحة تحكم InfinityFree (Account Details)
-    // غالباً ما يكون شيء مثل: sqlXXX.infinityfree.com
-    $host = 'sql110.infinityfree.com'; // قم بتغيير هذا إلى Hostname الصحيح من لوحة التحكم
-    $db   = 'if0_40825383';           // اسم قاعدة البيانات (تأكد منه من لوحة التحكم)
-    $user = 'if0_40825383';           // اسم المستخدم (غالباً نفس رقم الحساب)
-    $pass = 'BJd4HIANgT';             // كلمة المرور التي زودتني بها
+    $host = 'sql100.infinityfree.com'; 
+    $db   = 'if0_40833135_charity_db';  
+    $user = 'if0_40833135';            
+    $pass = 'ZbnRDQN0oM';              // القيمة الدقيقة التي أرسلها المستخدم
 }
 
 $charset = 'utf8mb4';
@@ -28,13 +26,7 @@ $options = [
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 } catch (\PDOException $e) {
-    // في حالة الخطأ، نعرض رسالة واضحة
-    if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == '127.0.0.1') {
-        die("خطأ في الاتصال بقاعدة البيانات محلياً. تأكد من تشغيل XAMPP وإنشاء قاعدة البيانات باسم charity_db");
-    } else {
-        // في الاستضافة، يفضل عدم عرض تفاصيل الخطأ التقنية للزوار
-        die("خطأ في الاتصال بقاعدة البيانات على الاستضافة. يرجى التأكد من بيانات MySQL في ملف includes/db.php");
-    }
+    die("خطأ في الاتصال بقاعدة البيانات: " . $e->getMessage());
 }
 ?>
 
